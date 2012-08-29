@@ -1,0 +1,16 @@
+[Unit]
+Description=Direct xinit login for user %I
+After=graphical.target systemd-user-sessions.service
+Wants=x@vt7.service
+
+[Service]
+User=%I
+WorkingDirectory=/home/%I
+Environment=DISPLAY=:0
+TTYPath=/dev/tty7
+PAMName=login
+ExecStart=/bin/bash -l .xinitrc
+KillMode=control-group
+
+[Install]
+WantedBy=graphical.target

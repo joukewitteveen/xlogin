@@ -1,0 +1,58 @@
+These files make it possible to login to X without a desktop manager.
+
+Usage
+=====
+
+To enable automatic login at boot, execute:
+# systemctl enable xlogin\@.service
+# mv /etc/systemd/system/graphical.target.wants/xlogin\@{,<username>}.service
+
+The xlogin service sets up a user session and runs the users .xinitrc script.
+Several actions are available to the user.
+
+Logout
+------
+$ loginctl terminate-session "$XDG_SESSION_ID"
+
+Shutdown
+--------
+$ systemctl poweroff
+If no other users are logged in, this does not require a password.
+
+Reboot
+------
+$ systemctl reboot
+If no other users are logged in, this does not require a password.
+
+
+Files
+=====
+
+Makefile
+--------
+This makes installation through
+# make install
+possible.
+
+x-daemon
+--------
+This script makes starting X as a daemon possible. It is needed by the systemd
+service that manages X.
+
+x@.service
+----------
+This service governs an X session on a specified VT. It is of little use on its
+own.
+
+xlogin@.service
+---------------
+This service is responsible for setting up the user session and running the
+user's .xinitrc script. The script should not return.
+
+
+Known Bugs
+==========
+
+Stopping a user session through
+# systemctl stop xlogin\@<username>
+does not take down programs forked from the .xinitrc script.

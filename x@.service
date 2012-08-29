@@ -1,0 +1,8 @@
+[Unit]
+Description=X on %I
+Wants=graphical.target
+Before=graphical.target
+
+[Service]
+Type=forking
+ExecStart=/usr/bin/x-daemon -nolisten tcp -noreset %I

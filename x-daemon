@@ -1,0 +1,9 @@
+#! /bin/bash
+
+trap "exit 0" USR1
+(
+  trap "" USR1
+  exec /usr/bin/X "$@"
+) &
+wait
+exit 1
