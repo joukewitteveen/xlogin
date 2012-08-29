@@ -4,8 +4,7 @@ Usage
 =====
 
 To enable automatic login at boot, execute:
-# systemctl enable xlogin\@.service
-# mv /etc/systemd/system/graphical.target.wants/xlogin\@{,<username>}.service
+# systemctl enable xlogin\@<username>.service
 
 The xlogin service sets up a user session and runs the users .xinitrc script.
 Several actions are available to the user.
