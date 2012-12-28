@@ -5,12 +5,14 @@ Wants=x@vt7.service
 
 [Service]
 User=%I
-WorkingDirectory=/home/%I
+WorkingDirectory=%h
 Environment=DISPLAY=:0
 TTYPath=/dev/tty7
 PAMName=login
-ExecStart=/bin/bash -l .xinitrc
-KillMode=control-group
+ControlGroup=%R/user/%I/shared cpu:/
+ControlGroupModify=yes
+Type=notify
+ExecStart=/usr/lib/systemd/systemd --user
 
 [Install]
 WantedBy=graphical.target

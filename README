@@ -4,14 +4,19 @@ Usage
 =====
 
 To enable automatic login at boot, execute:
-# systemctl enable xlogin\@<username>.service
+# systemctl enable xlogin@<username>
 
-The xlogin service sets up a user session and runs the users .xinitrc script.
+The xlogin service sets up a user session and starts a user instance of
+systemd.
 Several actions are available to the user.
 
 Logout
 ------
 $ loginctl terminate-session "$XDG_SESSION_ID"
+or
+$ systemctl --user exit
+or
+# systemctl stop xlogin@<username>
 
 Shutdown
 --------
@@ -45,13 +50,6 @@ own.
 
 xlogin@.service
 ---------------
-This service is responsible for setting up the user session and running the
-user's .xinitrc script. The script should not return.
+This service is responsible for setting up the user session and starting a user
+instance of systemd.
 
-
-Known Bugs
-==========
-
-Stopping a user session through
-# systemctl stop xlogin\@<username>
-does not take down programs forked from the .xinitrc script.

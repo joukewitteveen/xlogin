@@ -5,4 +5,5 @@ Before=graphical.target
 
 [Service]
 Type=forking
+StopWhenUnneeded=true
 ExecStart=/usr/bin/x-daemon -nolisten tcp -noreset %I
