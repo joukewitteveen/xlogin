@@ -1,5 +1,5 @@
 [Unit]
-Description=Direct xinit login for user %I
+Description=Direct X login for user %I
 After=graphical.target systemd-user-sessions.service
 Wants=x@vt7.service
 

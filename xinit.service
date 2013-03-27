@@ -1,0 +1,8 @@
+[Unit]
+Description=~/.xinitrc
+
+[Service]
+ExecStart=/bin/bash -l .xinitrc
+
+[Install]
+WantedBy=xinit.target
