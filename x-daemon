@@ -1,4 +1,4 @@
-#! /bin/bash
+#! /usr/bin/bash
 
 trap "exit 0" USR1
 (

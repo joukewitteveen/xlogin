@@ -6,17 +6,14 @@ Usage
 To enable automatic login at boot, execute:
 # systemctl enable xlogin@<username>
 
-The xlogin service sets up a user session and starts a user instance of
-systemd.
-Several actions are available to the user.
+The xlogin service sets up a user session and runs the .xinitrc script of the
+user. Several actions are available to the user.
 
 Logout
 ------
 $ loginctl terminate-session "$XDG_SESSION_ID"
 or
 $ systemctl --user exit
-or
-# systemctl stop xlogin@<username>
 
 Shutdown
 --------
@@ -50,6 +47,29 @@ own.
 
 xlogin@.service
 ---------------
-This service is responsible for setting up the user session and starting a user
-instance of systemd.
+This service is responsible for setting up the user session and running the
+user's .xinitrc script. The script should not return.
+
+25-xlogin
+---------
+This script makes sure the systemd user dbus socket is not reused for the
+user's X session. Its invocation is guaranteed by having the following on top
+of your .xinitrc:
+
+    if [ -d /etc/X11/xinit/xinitrc.d ]; then
+        for f in /etc/X11/xinit/xinitrc.d/*; do
+            [ -x "$f" ] && . "$f"
+        done
+        unset f
+    fi
+
+As a consequence, systemd commands that interface the user session will no
+longer be able to communicate with the systemd instance. To alleviate this
+problem, include the following in your .bashrc:
+
+    for sd_cmd in systemctl systemd-analyze systemd-run; do
+        alias $sd_cmd='DBUS_SESSION_BUS_ADDRESS="unix:path=$XDG_RUNTIME_DIR/dbus/user_bus_socket" '$sd_cmd
+    done
+
+Service files for setting up the session bus socket are not provided by xlogin.
 

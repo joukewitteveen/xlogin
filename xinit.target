@@ -1,7 +1,0 @@
-[Unit]
-Description=xinit session
-Wants=xinit.service
-AllowIsolate=yes
-
-[Install]
-Alias=default.target
