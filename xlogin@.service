@@ -12,7 +12,6 @@ PAMName=login
 Environment=DISPLAY=:0
 Environment=DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/%U/dbus/user_bus_socket
 ExecStart=/usr/bin/bash -l .xinitrc
-Slice=user-%U.slice
 
 [Install]
 WantedBy=graphical.target
