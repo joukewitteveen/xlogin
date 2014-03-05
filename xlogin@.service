@@ -1,17 +1,15 @@
 [Unit]
-Description=Direct X login for user %I
+Description=Direct X login for user %i
 After=x@vt7.service systemd-user-sessions.service
 Wants=x@vt7.service
 Conflicts=getty@tty7.service
 
 [Service]
-User=%I
-WorkingDirectory=%h
+User=%i
 TTYPath=/dev/tty7
 PAMName=login
 Environment=DISPLAY=:0
-Environment=DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/%U/dbus/user_bus_socket
-ExecStart=/usr/bin/bash -l .xinitrc
+ExecStart=/usr/bin/bash -l -c "cd; source .xinitrc"
 
 [Install]
 WantedBy=graphical.target
