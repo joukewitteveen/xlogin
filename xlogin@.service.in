@@ -9,7 +9,7 @@ User=%i
 TTYPath=/dev/tty7
 PAMName=login
 Environment=DISPLAY=:0
-ExecStart=/usr/bin/bash -l -c "cd; source .xinitrc"
+ExecStart=@bash@ -l -c "cd; source .xinitrc"
 
 [Install]
 WantedBy=graphical.target

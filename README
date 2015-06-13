@@ -68,7 +68,7 @@ longer be able to communicate with the systemd instance. To alleviate this
 problem, include the following in your .bashrc:
 
     for sd_cmd in systemctl systemd-analyze systemd-run; do
-        alias $sd_cmd='DBUS_SESSION_BUS_ADDRESS="unix:path=$XDG_RUNTIME_DIR/dbus/user_bus_socket" '$sd_cmd
+        alias $sd_cmd='DBUS_SESSION_BUS_ADDRESS="unix:path=$XDG_RUNTIME_DIR/bus" '$sd_cmd
     done
 
 Service files for setting up the session bus socket are not provided by xlogin.
