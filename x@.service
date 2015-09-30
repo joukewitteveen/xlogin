@@ -6,4 +6,4 @@ StopWhenUnneeded=true
 
 [Service]
 Type=forking
-ExecStart=/usr/bin/x-daemon -nolisten tcp -noreset %I
+ExecStart=/usr/bin/x-daemon -noreset %I
