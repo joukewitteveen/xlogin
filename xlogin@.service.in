@@ -6,10 +6,11 @@ Conflicts=getty@tty7.service
 
 [Service]
 User=%i
+WorkingDirectory=~
 TTYPath=/dev/tty7
 PAMName=login
 Environment=DISPLAY=:0
-ExecStart=@bash@ -l -c "cd; source .xinitrc"
+ExecStart=@bash@ -l .xinitrc
 
 [Install]
 WantedBy=graphical.target
