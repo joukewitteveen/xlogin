@@ -50,6 +50,16 @@ xlogin@.service
 This service is responsible for setting up the user session and running the
 user's .xinitrc script. The script should not return.
 
+Generic Xservers accept an argument of type `ttyxx` (see man Xserver), whereas
+Xorg wants it in the form `vtxx` (see man Xorg). If the default settings do
+not satisfy to your needs, create an override file such as
+_/etc/systemd/system/xlogin@user.service.d/override.conf_:
+
+    [Unit]
+    After=x@tty7.service systemd-user-sessions.service
+    Wants=x@tty7.service
+
+
 25-xlogin
 ---------
 This script makes sure the systemd user dbus socket is not reused for the

@@ -1,9 +1,17 @@
 #! @bash@
 
+# X server sends a SIGUSR1 to its parent process
+# when connecting to the server is possible.
+# See "man 1 xserver" for details.
 trap "exit 0" USR1
 (
   trap "" USR1
-  exec /usr/bin/X "$@"
+  if [ -r /etc/X11/xinit/xserverrc ]
+  then
+    . /etc/X11/xinit/xserverrc "$@"
+  else
+    exec /usr/bin/X "$@"
+  fi
 ) &
 wait
 exit 1
