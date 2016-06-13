@@ -9,7 +9,7 @@ User=%i
 WorkingDirectory=~
 TTYPath=/dev/tty7
 PAMName=login
-Environment=DISPLAY=:0
+Environment=XDG_SESSION_TYPE=x11 DISPLAY=:0
 ExecStart=@bash@ -l .xinitrc
 
 [Install]
