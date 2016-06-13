@@ -50,8 +50,8 @@ xlogin@.service
 This service is responsible for setting up the user session and running the
 user's .xinitrc script. The script should not return.
 
-25-xlogin
----------
+25-xlogin.sh
+------------
 This script makes sure the systemd user dbus socket is not reused for the
 user's X session. Its invocation is guaranteed by having the following on top
 of your .xinitrc:
