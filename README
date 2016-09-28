@@ -1,5 +1,27 @@
 These files make it possible to login to X without a desktop manager.
 
+
+Installation
+============
+
+Several variables are supported by the installation through make:
+# make [DESTDIR=</stage/path>] [BASH=</path/to/bash>]
+       [SHELL=</current/path/to/bash>] [install]
+
+DESTDIR
+-------
+The DESTDIR path is prepended to each target in the installation, making staged
+installs possible. Empty by default.
+
+BASH
+----
+The path to the Bash executable used by xlogin. Defaults to /usr/bin/bash.
+
+SHELL
+-----
+The path to the Bash executable used by make. Defaults to the value of BASH.
+
+
 Usage
 =====
 
@@ -70,6 +92,4 @@ problem, include the following in your .bashrc:
     for sd_cmd in systemctl systemd-analyze systemd-run; do
         alias $sd_cmd='DBUS_SESSION_BUS_ADDRESS="unix:path=$XDG_RUNTIME_DIR/bus" '$sd_cmd
     done
-
-Service files for setting up the session bus socket are not provided by xlogin.
 
