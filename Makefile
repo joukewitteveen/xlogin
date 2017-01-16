@@ -1,7 +1,7 @@
-BASH = /usr/bin/bash
-SHELL := $(BASH)
+SHELL := bash
 
-install = install -D --mode=$(1) <(sed -e "s|@bash@|$(BASH)|g" $(2)) $(DESTDIR)$(3)/$(2:.in=)
+BASH_FROM_ENV = /usr/bin/env bash
+install = install -D --mode=$(1) <(sed -e "s|@bash@|$(BASH_FROM_ENV)|g" $(2)) $(DESTDIR)$(3)/$(2:.in=)
 
 .PHONY: install
 install:
